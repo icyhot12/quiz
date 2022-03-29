@@ -21,6 +21,10 @@ input[type='radio'] {
   position: fixed;
 } */
 
+.testowa {
+  background-color: red;
+}
+
 input[type='radio']:checked + label {
   background-color: red;
   border-radius: 4px;
