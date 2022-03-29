@@ -154,7 +154,7 @@ function App() {
           className="button--bottom"
           onClick={(event) => answersCheck(event)}
         >
-          Check your quiz
+          Check your answers modified
         </button>
       </div >
     )
