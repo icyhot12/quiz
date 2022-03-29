@@ -125,7 +125,7 @@ function App() {
       <div>
         {questionsArray.map((question, indexA) => {
           return (
-            <div className="question--full">
+            <div className="question--full" key={nanoid()}>
               <div className="question" key={nanoid()}>
                 <div>{question}</div>
                 {mixedArray[indexA].map((answer, indexB) => {
