@@ -34,12 +34,17 @@ function App() {
     mixed_answers[i] = shuffle(full_answers[i])
   }
 
+  function handleChoose(e){
+    console.log(e.currentTarget.innerHTML)
+  }
+
   const questionsElements = data.map((element, index) => (
     <Question
       key={nanoid()}
       id={element.id}
       mixed_answers={mixed_answers[index]}
       question={decode(element.question)}
+      handleChoose={handleChoose}
     />
   )
   )
