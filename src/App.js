@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react"
 import { nanoid } from "nanoid"
 import { decode } from 'html-entities'
+import shuffle from "./shuffle.js"
 
 import Question from "./Question";
 
@@ -15,12 +16,29 @@ function App() {
       .then((data) => setData(data.results));
   }, [])
 
-  const questionsElements = data.map(element => (
+  let correctAnswers = []
+  data.map(element =>
+    correctAnswers.push(element.correct_answer))
+
+  let incorrect_answers = []
+  data.map(element =>
+    incorrect_answers.push(element.incorrect_answers))
+
+  let full_answers = []
+  for (let i = 0; i < correctAnswers.length; i++) {
+    full_answers[i] = incorrect_answers[i].concat(correctAnswers[i])
+  }
+
+  let mixed_answers = []
+  for (let i = 0; i < correctAnswers.length; i++) {
+    mixed_answers[i] = shuffle(full_answers[i])
+  }
+
+  const questionsElements = data.map((element, index) => (
     <Question
       key={nanoid()}
       id={element.id}
-      correct_answer={element.correct_answer}
-      incorrect_answers={element.incorrect_answers}
+      mixed_answers={mixed_answers[index]}
       question={decode(element.question)}
     />
   )
