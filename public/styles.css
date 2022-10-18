@@ -4,3 +4,40 @@ html,body {
     font-family: 'Roboto', sans-serif;
 }
 
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    gap:20px;
+}
+
+.question-container {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 20px;
+}
+
+.answers-container {
+    display: flex;
+    gap: 20px;
+}
+
+.answers-container > button, .btn-container > button {
+    background-color: white;
+    border: 2px solid darkgray;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
