@@ -4,10 +4,12 @@ import { decode } from "html-entities"
 
 function Button(props) {
 
-    const [isHeld, setIsHeld] = useState(false)
+    const style = {
+        backgroundColor: props.isHeld ? "yellow" : "white"
+    }
 
     return (
-        <button onClick={(event) => props.handleClick(event)}>{decode(props.value)}</button>
+        <button style={style} onClick={() => props.handleClick(props)}>{decode(props.value)}</button>
     )
 }
 

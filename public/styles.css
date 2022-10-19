@@ -47,6 +47,10 @@ text-align: center;
     cursor: pointer;
 }
 
+.answers-container > .clicked {
+    background-color: red;
+}
+
 .btn-container > button {
     background-color: lightskyblue;
 }
