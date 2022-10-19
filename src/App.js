@@ -16,22 +16,24 @@ function App() {
       .then((data) => setData(data.results));
   }, [])
 
+// preparing answers
+
   let correctAnswers = []
   data.map(element =>
     correctAnswers.push(element.correct_answer))
 
-  let incorrect_answers = []
+  let incorrectAnswers = []
   data.map(element =>
-    incorrect_answers.push(element.incorrect_answers))
+    incorrectAnswers.push(element.incorrect_answers))
 
-  let full_answers = []
+  let fullAnswers = []
   for (let i = 0; i < correctAnswers.length; i++) {
-    full_answers[i] = incorrect_answers[i].concat(correctAnswers[i])
+    fullAnswers[i] = incorrectAnswers[i].concat(correctAnswers[i])
   }
 
-  let mixed_answers = []
+  let mixedAnswers = []
   for (let i = 0; i < correctAnswers.length; i++) {
-    mixed_answers[i] = shuffle(full_answers[i])
+    mixedAnswers[i] = shuffle(fullAnswers[i])
   }
 
   function handleChoose(e){
@@ -42,7 +44,7 @@ function App() {
     <Question
       key={nanoid()}
       id={element.id}
-      mixed_answers={mixed_answers[index]}
+      mixedAnswers={mixedAnswers[index]}
       question={decode(element.question)}
       handleChoose={handleChoose}
     />

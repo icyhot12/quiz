@@ -1,28 +1,28 @@
 import React from "react";
 import { useState } from "react";
-import { decode } from "html-entities"
+import Button from "./Button";
 
 function Question(props) {
-
-    const [isHeld, setIsHeld] = useState(false)
-
-    const style = {
-        backgroundColor: isHeld ? "red" : "green"
-    }
     
+    const [clicked, setClicked] = useState("")
+
     function handleClick(event) {
-        props.handleChoose(event)
-        
+        setClicked(event.currentTarget.innerHTML)
     }
+
+    console.log(clicked)
+
+    const buttons = props.mixedAnswers.map((element,index) => <Button />)
 
     return (
         <div className="question-container">
             <div className="question">{props.question}</div>
             <div className="answers-container">
-                <button style = {style} onClick={handleClick}>{decode(props.mixed_answers[0])}</button>
-                <button style = {style} onClick={handleClick}>{decode(props.mixed_answers[1])}</button>
-                <button style = {style} onClick={handleClick}>{decode(props.mixed_answers[2])}</button>
-                <button style = {style} onClick={handleClick}>{decode(props.mixed_answers[3])}</button>
+                <Button value={props.mixedAnswers[0]} handleClick={handleClick}/>
+                <Button value={props.mixedAnswers[1]} handleClick={handleClick}/>
+                <Button value={props.mixedAnswers[2]} handleClick={handleClick}/>
+                <Button value={props.mixedAnswers[3]} handleClick={handleClick}/>
+               
             </div>
         </div>
     )
