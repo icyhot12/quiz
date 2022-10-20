@@ -12,11 +12,8 @@ function Question(props) {
     }
 
     useEffect(() => {
-        if (clicked >= 0) {
-            props.handleSelect(props.mixedAnswers[clicked], props.questionId)
-        }
-    }
-        , [clicked])
+        props.handleSelect(props.mixedAnswers[clicked],props.questionId)
+    },[clicked])
 
     const buttons = props.mixedAnswers.map((element, index) => <Button
         key={nanoid()}
