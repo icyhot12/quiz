@@ -3,18 +3,22 @@ import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import shuffle from "./shuffle.js";
+import reconstruct from "./reconstruct.js";
 
 import Question from "./Question";
 
 function App() {
   const [data, setData] = useState([]);
-  const selected = useRef([])
+  const [questions, setQuestions] = useState();
+  const selected = useRef([]);
 
   useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple")
       .then((response) => response.json())
-      .then((data) => setData(data.results));
-  }, []);
+      .then(data => {
+        const reconstructedData = reconstruct(data)
+        setData(reconstructedData)
+  })}, []);
 
   // preparing answers
 
@@ -34,8 +38,8 @@ function App() {
     mixedAnswers[i] = shuffle(fullAnswers[i]);
   }
 
-  function handleSelect(clicked,index) {
-    selected.current[index] = clicked
+  function handleSelect(clicked, index) {
+    selected.current[index] = clicked;
   }
 
   const questionsElements = data.map((element, index) => (
@@ -48,12 +52,18 @@ function App() {
     />
   ));
 
+  function handleCheck() {
+    for (let i = 0; i < questionsElements.length; i++) {
+      console.log(questionsElements[i]);
+    }
+  }
+
   return mixedAnswers.length > 1 ? (
     <div className="main-container">
       <div className="title">Quiz</div>
       <div className="question-container">{questionsElements}</div>
       <div className="btn-container">
-        <button>Check your answers</button>
+        <button onClick={() => handleCheck()}>Check your answers</button>
       </div>
     </div>
   ) : (
